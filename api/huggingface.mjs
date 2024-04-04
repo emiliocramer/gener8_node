@@ -27,9 +27,11 @@ export async function run(promptUsed) {
 
 	try {
 		console.log('Attempting to read file...');
-		return await fs.readFile(audioFilePath);
+		const tempFilePath = '/app/tmp/generated_audio.wav';
+		await fs.copyFile(audioFilePath, tempFilePath);
+		return await fs.readFile(tempFilePath);
 	} catch (error) {
-		console.error('Error reading file:', error);
+		console.error('Error reading or copying file:', error);
 		throw error;
 	}
 }
