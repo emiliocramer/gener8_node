@@ -13,10 +13,17 @@
     "@google-cloud/storage": "7.9.0",
     "axios": "1.6.8",
     "body-parser": "1.20.2",
+    "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
+    "eventsource": "2.0.2",
     "express": "4.19.2",
+    "gradio": "0.1.0",
+    "gradio-client": "1.0.0",
     "mongoose": "8.2.4",
     "multer": "1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "@gradio/client": "0.15.0"
   }
 }

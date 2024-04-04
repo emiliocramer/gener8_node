@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const songRoutes = require('./api/routes/song');
+const huggingfaceRoutes = require('./api/routes/huggingface');
 
 require('dotenv').config();
 const app = express();
@@ -19,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 
 app.use('/api/song', songRoutes);
-
+app.use('/api/huggingface', huggingfaceRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

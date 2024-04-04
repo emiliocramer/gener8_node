@@ -4,7 +4,10 @@ const { Schema } = mongoose;
 const songSchema = new Schema({
     name: String,
     description: String,
-    audioURL: String,
+    audioID: {
+        type: Schema.Types.ObjectId,
+        ref: 'Audio',
+    },
     promptUsed: String,
     upvoteCount: {
         type: Number,
