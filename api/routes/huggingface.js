@@ -17,7 +17,7 @@ router.post('/run', timeout('500s'), async (req, res) => {
             return res.status(400).send('prompt required to run.');
         }
 
-        const audioFileData = await run(promptUsed);
+        const audioFileData = run(promptUsed);
         const filename = `generated_audio_${Date.now()}.wav`;
 
         const file = bucket.file(`audios/${filename}`);

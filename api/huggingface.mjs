@@ -1,5 +1,5 @@
 import {client} from "@gradio/client";
-import { promises as fs } from 'fs';
+import {promises as fs} from 'fs';
 
 export async function run(promptUsed) {
 	global.window = {
@@ -21,6 +21,15 @@ export async function run(promptUsed) {
 		5, // number in 'Temperature' Number component
 		5, // number in 'Classifier Free Guidance' Number component
 	]);
+
 	const audioFilePath = result.data[1].name;
-	return await fs.readFile(audioFilePath);
+	console.log('Full audio file path:', audioFilePath);
+
+	try {
+		console.log('Attempting to read file...');
+		return await fs.readFile(audioFilePath);
+	} catch (error) {
+		console.error('Error reading file:', error);
+		throw error;
+	}
 }
