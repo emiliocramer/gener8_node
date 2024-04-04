@@ -1,9 +1,10 @@
 const { Storage } = require('@google-cloud/storage');
-const {run} = require("./huggingface.mjs");
 
 const jobs = [];
 
 async function generateSong(job) {
+    const { run } = await import('./huggingface.mjs');
+
     try {
         console.log('Processing job:', job.jobId);
         const { promptUsed } = job.data;
