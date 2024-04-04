@@ -1,4 +1,4 @@
-import { client } from "@gradio/client";
+import {client} from "@gradio/client";
 
 export async function run(promptUsed) {
 	global.window = {
@@ -6,6 +6,7 @@ export async function run(promptUsed) {
 	};
 
 	const app = await client("https://emiliocramer-prototypeone.hf.space/");
+	const fs = require("fs");
 	console.log("building result")
 	const result = await app.predict(2, [
 		"facebook/musicgen-melody", // string in 'Model' Radio component
@@ -20,7 +21,5 @@ export async function run(promptUsed) {
 		5, // number in 'Classifier Free Guidance' Number component
 	]);
 	const audioFilePath = result.data[1].name;
-	const audioFileData = await fs.readFile(audioFilePath);
-
-	return audioFileData;
+	return await fs.readFile(audioFilePath);
 }
