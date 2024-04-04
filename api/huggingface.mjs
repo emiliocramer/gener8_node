@@ -1,4 +1,5 @@
 import {client} from "@gradio/client";
+import { promises as fs } from 'fs';
 
 export async function run(promptUsed) {
 	global.window = {
@@ -6,8 +7,8 @@ export async function run(promptUsed) {
 	};
 
 	const app = await client("https://emiliocramer-prototypeone.hf.space/");
-	const fs = require("fs");
 	console.log("building result")
+
 	const result = await app.predict(2, [
 		"facebook/musicgen-melody", // string in 'Model' Radio component
 		"", // string in 'Model Path (custom models)' Textbox component
