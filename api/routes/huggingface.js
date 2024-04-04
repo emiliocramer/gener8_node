@@ -18,7 +18,7 @@ router.post('/run', async (req, res) => {
 
         await addJob('generateSong', { promptUsed });
 
-        res.status(202).json({ message: "Song generation started", jobId });
+        res.status(202).json({ message: "Song generation started" });
     } catch (error) {
         console.error('Run Error:', error);
         res.status(500).send(error.message);
