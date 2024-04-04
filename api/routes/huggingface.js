@@ -3,12 +3,13 @@ const router = express.Router();
 global.EventSource = require('eventsource');
 
 const { Storage } = require('@google-cloud/storage');
+const timeout = require('connect-timeout');
 
 const key = JSON.parse(process.env.GOOGLE_CLOUD_KEY_JSON);
 const storage = new Storage({ credentials: key });
 const bucket = storage.bucket('prototype-one-bucket');
 
-router.post('/run', async (req, res) => {
+router.post('/run', timeout('500s'), async (req, res) => {
     try {
         const { run } = await import('../huggingface.mjs');
         const { promptUsed } = req.body;
