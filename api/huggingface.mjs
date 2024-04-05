@@ -22,14 +22,5 @@ export async function run(promptUsed) {
 		5, // number in 'Classifier Free Guidance' Number component
 	]);
 
-	const audioFilePath = result.data[1].name;
-	console.log('Full audio file path:', audioFilePath);
-
-	try {
-		console.log('Attempting to read file...');
-		return await fs.readFile(audioFilePath);
-	} catch (error) {
-		console.error('Error reading file:', error);
-		throw error;
-	}
+	return result.data[1].name;
 }
