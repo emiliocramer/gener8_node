@@ -1,5 +1,5 @@
 const { Storage } = require('@google-cloud/storage');
-const { fetch } = require('node-fetch');
+import fetch from 'node-fetch';
 const jobs = [];
 
 const key = JSON.parse(process.env.GOOGLE_CLOUD_KEY_JSON);
