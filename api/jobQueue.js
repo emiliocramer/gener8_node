@@ -1,5 +1,4 @@
 const { Storage } = require('@google-cloud/storage');
-import fetch from 'node-fetch';
 const jobs = [];
 
 const key = JSON.parse(process.env.GOOGLE_CLOUD_KEY_JSON);
@@ -12,6 +11,7 @@ async function generateSong(job) {
     try {
         console.log('Processing job:', job.jobId);
         const { promptUsed } = job.data;
+        const {fetch} = require('node-fetch');
 
         const tmpFilePath =  run(promptUsed);
         const audioFilePublicUrl = `https://emiliocramer-prototypeone.hf.space/file=${tmpFilePath}`;
