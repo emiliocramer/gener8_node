@@ -1,6 +1,7 @@
 const { Storage } = require('@google-cloud/storage');
 const jobs = [];
 
+const Audio = require('./schemas/Audio');
 const key = JSON.parse(process.env.GOOGLE_CLOUD_KEY_JSON);
 const storage = new Storage({ credentials: key });
 const bucket = storage.bucket('prototype-one-bucket');
@@ -30,6 +31,13 @@ async function generateSong(job) {
             await file.save(audioFileData);
             const audioFileUrl = file.publicUrl();
 
+            const audio = new Audio({
+                audioUrl: audioFileUrl,
+                jobId: job.jobId
+            });
+
+            await audio.save();
+
             console.log('Audio file uploaded to Google Cloud Storage:', audioFileUrl);
 
         } catch (error) {
@@ -54,8 +62,7 @@ setInterval(async () => {
     }
 }, 500);
 
-const addJob = async (jobName, data) => {
-    const jobId = Date.now();
+const addJob = async (jobName, data, jobId) => {
     jobs.push({ jobName, data, jobId });
 };
 

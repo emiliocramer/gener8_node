@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 global.EventSource = require('eventsource');
 const { addJob } = require('../jobQueue');
+const { v4: uuidv4 } = require('uuid');
 
 const { Storage } = require('@google-cloud/storage');
 
@@ -16,9 +17,10 @@ router.post('/run', async (req, res) => {
             return res.status(400).send('prompt required to run.');
         }
 
-        await addJob('generateSong', { promptUsed });
+        const jobId = uuidv4();
+        await addJob('generateSong', { promptUsed }, jobId);
 
-        res.status(202).json({ message: "Song generation started" });
+        res.status(202).json({ message: "Song generation started", id: jobId });
     } catch (error) {
         console.error('Run Error:', error);
         res.status(500).send(error.message);
